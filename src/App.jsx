@@ -36,6 +36,7 @@ function App() {
       <div className="header-img">
         <img src={logo} alt="50px" width="50px" />
       </div>
+      
       <WishInput
         onNewWish={(newWish) => {
           console.log('Se ha lanzado el evento');

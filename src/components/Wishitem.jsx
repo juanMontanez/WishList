@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import ClassNames from "classnames";
 import "./WishItem.css";
+import WishInput from "./WishInput";
 
 function Wishitem({ item, onChangeWish }) {
+  const deleteWish = (id) => {
+    setWish(item.filter(item => item.id !== id))
+}
   return (
     // El li necesita una clave que sea diferente para cada elemento de la lista
     <li className="list-group-item wishItem">
@@ -29,6 +33,9 @@ function Wishitem({ item, onChangeWish }) {
       >
         {item.text}
       </label>
+      <button type="button" className="btn btn-primary m-3" value="edit">Edit</button>
+      <button type="button" className="btn btn-danger m-1">Delete</button>
+
     </li>
   );
 }

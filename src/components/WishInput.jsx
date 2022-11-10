@@ -2,13 +2,26 @@ import React, { useRef } from 'react';
 // Solo me estoy trayendo una funcion y con el as le pongo el nombre que yo quiera
 import { v4 as Uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
+import  WishAdd  from './WishAdd';
+
+
+
 
 // El parametro entre llaves porque es un evento/funcion/objeto
 function WishInput({ onNewWish }) {
+  const add = (event) => {
+    if (event.key === 'Enter' && inputText.current.value.length > 0) {
+      // creamos un evento nuevo que recibira 3 parametros
+      onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
+      // Pongo el campo vacio despues haber introducido el nuevo deseo
+      inputText.current.value = '';
+    }
+  }
+
   // Creamos una variable de tipo referencia para recuperar un elemento
   const inputText = useRef();
   return (
-    <fieldset className="form-group">
+    <fieldset className="input-group">
       <legend>New Dish: </legend>
       <input
         className="form-control"
@@ -16,15 +29,16 @@ function WishInput({ onNewWish }) {
         placeholder="Enter your new wish"
         // Lo añadimos como atributo
         ref={inputText}
-        onKeyUp={(event) => {
-          if (event.key === 'Enter' && inputText.current.value.length > 0) {
-            // creamos un evento nuevo que recibira 3 parametros
-            onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
-            // Pongo el campo vacio
-            inputText.current.value = '';
-          }
-        }}
+        onKeyUp={add}
       />
+      <WishAdd addClick ={ (event) => {
+      if (inputText.current.value.length > 0) {
+      // creamos un evento nuevo que recibira 3 parametros
+      onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
+      // Pongo el campo vacio despues haber introducido el nuevo deseo
+      inputText.current.value = '';
+      }
+     }}/>
     </fieldset>
   );
 }
