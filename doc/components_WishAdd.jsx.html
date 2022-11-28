@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/WishSave.jsx</title>
+    <title>JSDoc: Source: components/WishAdd.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/WishSave.jsx</h1>
+    <h1 class="page-title">Source: components/WishAdd.jsx</h1>
 
     
 
@@ -30,34 +30,42 @@
 import PropTypes from "prop-types";
 
 /**
- * Callback que se ejecuta cuando el usuario hace click.
- * @callback onWishesSave - Callback que se ejecuta cuando el deseo camia.
+ * Callback para ejecutar cuando se pulse el botón add
+ * @callback addClick - Callback que se ejecutará cuando se pulse el botón add.
  */
 
 /**
- * Renderiza la acción de un botón.
- * @param {onWishesSave} callback - Callback que se ejecuta cuando el usuario hace click
+ * Renderiza el botón add
+ * @param {addClick} callback - Callback para ejecutarse cuando se pulse el botón add.
  */
-function WishSave({ onWishesSave }) {
+function WishAdd({ addClick }) {
   return (
-    &lt;input
-      className="btn btn-success m-4"
-      type="button"
-      value="Save"
-      onClick={onWishesSave}
-    />
+    &lt;div>
+      &lt;input
+        type="button"
+        className="btn btn-primary"
+        value="Add"
+        onClick={addClick}
+      />
+    &lt;/div>
   );
 }
 
-WishSave.propTypes = {
-  onWishesSave: PropTypes.func,
+WishAdd.propTypes = {
+  addClick: PropTypes.func,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    done: PropTypes.bool.isRequired,
+  }),
 };
 
-WishSave.defaultProps = {
-  onWishesSave: () => {},
+WishAdd.defaultProps = {
+  item: { id: "0", text: "Texto por defecto", done: false },
+  addClick: () => {},
 };
 
-export default WishSave;
+export default WishAdd;
 </code></pre>
         </article>
     </section>

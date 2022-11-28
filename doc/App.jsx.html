@@ -28,68 +28,86 @@
         <article>
             <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
 import { v4 as Uuidv4 } from "uuid";
-import Wishlist from "./components/Wishlist";
+import WishList from "./components/WishList";
 import WishInput from "./components/WishInput";
 import WishSave from "./components/WishSave";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min";
+import logo from "./assets/react.svg";
+import WishSearchBar from "./components/WishSearchBar";
 
-const initialWishes = [
-  { id: Uuidv4(), text: "Aprender React", done: false },
-  { id: Uuidv4(), text: "Aprender Bootstrap", done: false },
-  { id: Uuidv4(), text: "Aprender Javascript", done: false },
-  { id: Uuidv4(), text: "Aprender frontend", done: true },
-];
 /**
  * Administra una lista de deseos
  * @returns Html con una lista de deseos
  */
 function App() {
-  // useState devuelve una variable y una funcion que modifica esa variable,
-  // dandole un estado a esa variable
-  // Se utiliza estados para componentes dinamicos
+  /**
+   * Obtiene una lista de deseos
+   * @returns JSON con la lista de deseos almacenadas en el LocalStorage
+   */
+  let initialWishes = JSON.parse(localStorage.getItem("WISHES"));
+
+  /**
+   * Gestiona el input del campo de busqueda
+   * @returns el input del campo de busqueda, que es seteado con setInput
+   */
+  const [input, setInput] = useState("");
+
+  /**
+   * Obtiene el input del campo de busqueda
+   * @returns el input del campo de busqueda en minúsculas, que es seteado con setInput
+   */
+  const search = (event) => {
+    const lowerCase = event.target.value.toLowerCase();
+    setInput(lowerCase);
+  };
+
+  if (!initialWishes) {
+    initialWishes = [
+      { id: Uuidv4(), text: "Aprender React", done: false },
+      { id: Uuidv4(), text: "Aprender Bootstrap", done: false },
+      { id: Uuidv4(), text: "Aprender Javascript", done: false },
+      { id: Uuidv4(), text: "Aprender frontend", done: true },
+    ];
+  }
+
+  /**
+   * Gestiona el array de los deseos
+   * @returns un array de deseos, que es seteada con setWishes
+   */
   const [wishes, setWishes] = useState(initialWishes);
-  console.log(wishes);
+
   return (
     &lt;div className="container-fluid">
       &lt;h1>My Wishlist&lt;/h1>
+      &lt;div className="header-img m-4">
+        &lt;img src={logo} alt="50px" width="50px" />
+      &lt;/div>
+      &lt;WishSearchBar onChange={search} />
       &lt;WishInput
         onNewWish={(newWish) => {
-          console.log("Se ha lanzado el evento");
-          // Coge el array y le añade al final el newWish
           setWishes([...wishes, newWish]);
         }}
       />
-      &lt;Wishlist
+      &lt;WishList
+        props={input}
+        setWishes={setWishes}
         wishes={wishes}
-        // El deseo actualizado llega a appp desde wishlist
         onUpdateWish={(updateWish) => {
-          /*
-        //console.log(onUpdateWish);
-        const updateWishes = wishes.map((wish) => {
-          if(wish.id === updatedWish.id) {
-            return updatedWish;
-          }
-          return wish;
-        }); */
-          // Copiamos el array wishes
-          const updateWishes = [...wishes];
-          // Recorremo el array y buscamos obejtos con el mismo id
-          const modifyWish = updateWishes.find(
+          const updatedWishes = [...wishes];
+          const modifyWish = updatedWishes.find(
             (wish) => wish.id === updateWish.id
           );
-          // Una vez encontrado modificamos los valores
           modifyWish.text = updateWish.text;
           modifyWish.done = updateWish.done;
-          setWishes(updateWishes);
+          setWishes(updatedWishes);
         }}
       />
-
       &lt;WishSave
         onWishesSave={() => {
           console.log("Saving wishes...");
-          localStorage.setItem("WISHES", JSON.stringify(appWishes));
+          localStorage.setItem("WISHES", JSON.stringify(wishes));
         }}
       />
     &lt;/div>
@@ -107,13 +125,13 @@ export default App;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Wishlist">Wishlist</a></li><li><a href="global.html#WishSave">WishSave</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#WishAdd">WishAdd</a></li><li><a href="global.html#WishDelete">WishDelete</a></li><li><a href="global.html#WishEdit">WishEdit</a></li><li><a href="global.html#WishInput">WishInput</a></li><li><a href="global.html#WishItem">WishItem</a></li><li><a href="global.html#WishList">WishList</a></li><li><a href="global.html#WishModal">WishModal</a></li><li><a href="global.html#WishSave">WishSave</a></li><li><a href="global.html#WishSearchBar">WishSearchBar</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Nov 03 2022 11:14:54 GMT+0100 (hora estándar de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Nov 29 2022 00:00:32 GMT+0100 (hora estándar de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/WishSave.jsx</title>
+    <title>JSDoc: Source: components/WishDelete.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/WishSave.jsx</h1>
+    <h1 class="page-title">Source: components/WishDelete.jsx</h1>
 
     
 
@@ -30,34 +30,44 @@
 import PropTypes from "prop-types";
 
 /**
- * Callback que se ejecuta cuando el usuario hace click.
- * @callback onWishesSave - Callback que se ejecuta cuando el deseo camia.
+ * Callback para ejecutar cuando se pulse el botón delete
+ * @callback deleteClick - Callback que se ejecutará cuando se pulse el botón delete.
  */
 
 /**
- * Renderiza la acción de un botón.
- * @param {onWishesSave} callback - Callback que se ejecuta cuando el usuario hace click
+ * Renderiza el botón delete
+ * @param {deleteClick} callback - Callback para ejecutarse cuando se pulse el botón delete.
+ * @param {Oject[]} item - Es un deseo
+ * @param {String} item[].id - Identificador para el deseo.
+ * @param {String} item[].text - Texto para el deseo.
+ * @param {Boolean} item[].done - Estado del deseo.
  */
-function WishSave({ onWishesSave }) {
+function WishDelete({ deleteClick, item }) {
   return (
     &lt;input
-      className="btn btn-success m-4"
       type="button"
-      value="Save"
-      onClick={onWishesSave}
+      className="btn btn-danger m-1"
+      value="Delete"
+      onClick={() => deleteClick(item)}
     />
   );
 }
 
-WishSave.propTypes = {
-  onWishesSave: PropTypes.func,
+WishDelete.propTypes = {
+  deleteClick: PropTypes.func,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    done: PropTypes.bool.isRequired,
+  }),
 };
 
-WishSave.defaultProps = {
-  onWishesSave: () => {},
+WishDelete.defaultProps = {
+  item: { id: "0", text: "Texto por defecto", done: false },
+  deleteClick: () => {},
 };
 
-export default WishSave;
+export default WishDelete;
 </code></pre>
         </article>
     </section>

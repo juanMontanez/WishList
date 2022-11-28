@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/WishSave.jsx</title>
+    <title>JSDoc: Source: components/WishEdit.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/WishSave.jsx</h1>
+    <h1 class="page-title">Source: components/WishEdit.jsx</h1>
 
     
 
@@ -28,36 +28,53 @@
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
 import PropTypes from "prop-types";
+import WishModal from "./WishModal";
 
 /**
- * Callback que se ejecuta cuando el usuario hace click.
- * @callback onWishesSave - Callback que se ejecuta cuando el deseo camia.
+ * Callback para ejecutar cuando se pulse el botón edit
+ * @callback editClick - Callback que se ejecutará cuando se pulse el botón edit.
  */
 
 /**
- * Renderiza la acción de un botón.
- * @param {onWishesSave} callback - Callback que se ejecuta cuando el usuario hace click
+ * Renderiza el botón de editar
+ * @param {editClick} callback - Callback para ejecutarse cuando se pulse el botón.
+ * @param {Oject[]} item - Es un deseo
+ * @param {String} item[].id - Identificador para el deseo.
+ * @param {String} item[].text - Texto para el deseo.
+ * @param {Boolean} item[].done - Estado del deseo.
+ * @returns  Un modal con el contenido del item que se va a editar
  */
-function WishSave({ onWishesSave }) {
+function WishEdit({ editClick, item }) {
   return (
-    &lt;input
-      className="btn btn-success m-4"
-      type="button"
-      value="Save"
-      onClick={onWishesSave}
-    />
+    &lt;>
+      &lt;button
+        type="button"
+        className="btn btn-primary m-3"
+        data-bs-toggle="modal"
+        data-bs-target={`#ID-${item.id}`}
+      >
+        Edit
+      &lt;/button>
+      &lt;WishModal item={item} editClick={editClick} />
+    &lt;/>
   );
 }
 
-WishSave.propTypes = {
-  onWishesSave: PropTypes.func,
+WishEdit.propTypes = {
+  editClick: PropTypes.func,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    done: PropTypes.bool.isRequired,
+  }),
 };
 
-WishSave.defaultProps = {
-  onWishesSave: () => {},
+WishEdit.defaultProps = {
+  item: { id: "0", text: "Texto por defecto", done: false },
+  editClick: () => {},
 };
 
-export default WishSave;
+export default WishEdit;
 </code></pre>
         </article>
     </section>
