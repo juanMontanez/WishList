@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ClassNames from "classnames";
 import "./WishItem.css";
 import WishDelete from "./WishDelete";
-
+import WishEdit from "./WishEdit";
 
 /**
  * Callback para setear un lista de deseos
@@ -59,7 +59,16 @@ function WishItem({ setWishes, wishes, item, onChangeWish }) {
         {item.text}
       </label>
 
-      
+      <WishEdit
+        item={item}
+        editClick={(editItem) => {
+          onChangeWish({
+            id: editItem.id,
+            text: editItem.text,
+            done: editItem.done,
+          });
+        }}
+      />
       <WishDelete
         item={item}
         deleteClick={(del) => {
