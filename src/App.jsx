@@ -1,68 +1,75 @@
-import React, { useState } from 'react';
-import { v4 as Uuidv4 } from 'uuid';
-import Wishlist from './components/Wishlist';
-import WishInput from './components/WishInput';
-import WishSave from './components/WishSave';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min';
-import logo from './assets/react.svg';
+import React, { useState } from "react";
+import { v4 as Uuidv4 } from "uuid";
+import WishList from "./components/WishList";
+import WishInput from "./components/WishInput";
+import WishSave from "./components/WishSave";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min";
+import logo from "./assets/react.svg";
 
 /**
  * Administra una lista de deseos
  * @returns Html con una lista de deseos
  */
 function App() {
-  let initialWishes = JSON.parse(localStorage.getItem('WISHES'));
+  /**
+   * Obtiene una lista de deseos
+   * @returns JSON con la lista de deseos almacenadas en el LocalStorage
+   */
+  let initialWishes = JSON.parse(localStorage.getItem("WISHES"));
+
+  /**
+   * Gestiona el input del campo de busqueda
+   * @returns el input del campo de busqueda, que es seteado con setInput
+   */
+  const [input, setInput] = useState("");
+
+  /**
+   * Obtiene el input del campo de busqueda
+   * @returns el input del campo de busqueda en minúsculas, que es seteado con setInput
+   */
+  const search = (event) => {
+    const lowerCase = event.target.value.toLowerCase();
+    setInput(lowerCase);
+  };
 
   if (!initialWishes) {
     initialWishes = [
-      { id: Uuidv4(), text: 'Aprender React', done: false },
-      { id: Uuidv4(), text: 'Aprender Bootstrap', done: false },
-      { id: Uuidv4(), text: 'Aprender Javascript', done: false },
-      { id: Uuidv4(), text: 'Aprender frontend', done: true },
+      { id: Uuidv4(), text: "Aprender React", done: false },
+      { id: Uuidv4(), text: "Aprender Bootstrap", done: false },
+      { id: Uuidv4(), text: "Aprender Javascript", done: false },
+      { id: Uuidv4(), text: "Aprender frontend", done: true },
     ];
   }
 
-  // useState devuelve una variable y una funcion que modifica esa variable,
-  // dandole un estado a esa variable
-  // Se utiliza estados para componentes dinamicos
+  /**
+   * Gestiona el array de los deseos
+   * @returns un array de deseos, que es seteada con setWishes
+   */
   const [wishes, setWishes] = useState(initialWishes);
-  console.log(wishes);
 
   return (
     <div className="container-fluid">
       <h1>My Wishlist</h1>
-      <div className="header-img">
+      <div className="header-img m-4">
         <img src={logo} alt="50px" width="50px" />
       </div>
-      
+     
       <WishInput
         onNewWish={(newWish) => {
-          console.log('Se ha lanzado el evento');
-          // Coge el array y le añade al final el newWish
           setWishes([...wishes, newWish]);
         }}
       />
-      <Wishlist
+      <WishList
+        props={input}
+        setWishes={setWishes}
         wishes={wishes}
-        // El deseo actualizado llega a appp desde wishlist
         onUpdateWish={(updateWish) => {
-          /*
-        //console.log(onUpdateWish);
-        const updateWishes = wishes.map((wish) => {
-          if(wish.id === updatedWish.id) {
-            return updatedWish;
-          }
-          return wish;
-        }); */
-          // Copiamos el array wishes
           const updatedWishes = [...wishes];
-          // Recorremo el array y buscamos obejtos con el mismo id
           const modifyWish = updatedWishes.find(
-            (wish) => wish.id === updateWish.id,
+            (wish) => wish.id === updateWish.id
           );
-          // Una vez encontrado modificamos los valores
           modifyWish.text = updateWish.text;
           modifyWish.done = updateWish.done;
           setWishes(updatedWishes);
@@ -70,8 +77,8 @@ function App() {
       />
       <WishSave
         onWishesSave={() => {
-          console.log('Saving wishes...');
-          localStorage.setItem('WISHES', JSON.stringify(wishes));
+          console.log("Saving wishes...");
+          localStorage.setItem("WISHES", JSON.stringify(wishes));
         }}
       />
     </div>

@@ -2,20 +2,45 @@ import React from "react";
 import PropTypes from "prop-types";
 import ClassNames from "classnames";
 import "./WishItem.css";
-import WishInput from "./WishInput";
+import WishDelete from "./WishDelete";
 
-function Wishitem({ item, onChangeWish }) {
-  const deleteWish = (id) => {
-    setWish(item.filter(item => item.id !== id))
-}
+
+/**
+ * Callback para setear un lista de deseos
+ * @callback setWishes - Callback que se ejecutara cuando se setea la lista de deseos.
+ * @param {Oject[]} wishes - Lista de deseos
+ */
+
+/**
+ * Callback para ejecutar cuando un deseo cambie
+ * @callback onChangeWish - Callback que se ejecutara cuando un deseo cambie.
+ * @param {Oject[]} item - Es un deseo
+ * @param {String} item[].id - Identificador para el deseo.
+ * @param {String} item[].text - Texto para el deseo.
+ * @param {Boolean} item[].done - Estado del deseo.
+ */
+
+/**
+ * Administra un deseo
+ * @param {setWishes} callback - Callback que setear el array de deseos
+ * @param {Oject[]} wishes - lista de deseos
+ * @param {String} wishes[].id - Identificador para el deseo.
+ * @param {String} wishes[].text - Texto para el deseo.
+ * @param {Boolean} wishes[].done - Estado del deseo.
+ * @param {Oject[]} item - Es un deseo
+ * @param {String} item[].id - Identificador para el deseo.
+ * @param {String} item[].text - Texto para el deseo.
+ * @param {Boolean} item[].done - Estado del deseo.
+ * @param {onChangeWish} callback - Callback para ejecutarse cuando un deseo cambie.
+ * @returns  HTML con un deseo
+ */
+function WishItem({ setWishes, wishes, item, onChangeWish }) {
   return (
-    // El li necesita una clave que sea diferente para cada elemento de la lista
-    <li className="list-group-item wishItem">
+    <li className="list-group-item WishItem">
       <input
         type="checkbox"
         defaultChecked={item.done}
         id={item.id}
-        // Evento para cuando cambie el deseo mando hacia wishlist ya modificado
         onChange={(event) => {
           onChangeWish({
             id: item.id,
@@ -33,28 +58,41 @@ function Wishitem({ item, onChangeWish }) {
       >
         {item.text}
       </label>
-      <button type="button" className="btn btn-primary m-3" value="edit">Edit</button>
-      <button type="button" className="btn btn-danger m-1">Delete</button>
 
+      
+      <WishDelete
+        item={item}
+        deleteClick={(del) => {
+          const newArray = wishes.filter((wish) => del.id !== wish.id);
+          setWishes(newArray);
+        }}
+      />
     </li>
   );
 }
-// Props
-// Se define el metodo
-Wishitem.propTypes = {
-  // Y en el contenido se llama al metodo shape porque es un objeto que contiene
+
+WishItem.propTypes = {
+  setWishes: PropTypes.func,
   item: PropTypes.shape({
-    // Un string y un boolean y que es requerido
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     done: PropTypes.bool.isRequired,
   }),
+  wishes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      done: PropTypes.bool.isRequired,
+    })
+  ),
   onChangeWish: PropTypes.func,
 };
-// Si nos llega la lista vacia le indicamos un valor por defecto
-Wishitem.defaultProps = {
+
+WishItem.defaultProps = {
+  wishes: [],
   item: { id: "0", text: "Texto por defecto", done: false },
+  setWishes: () => {},
   onChangeWish: () => {},
 };
 
-export default Wishitem;
+export default WishItem;

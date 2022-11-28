@@ -1,28 +1,36 @@
-import React, { useRef } from 'react';
-// Solo me estoy trayendo una funcion y con el as le pongo el nombre que yo quiera
-import { v4 as Uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
-import  WishAdd  from './WishAdd';
+import React, { useRef } from "react";
+import { v4 as Uuidv4 } from "uuid";
+import PropTypes from "prop-types";
+import WishAdd from "./WishAdd";
 
+/**
+ * Callback para ejecutar cuando se cree un deseo nuevo
+ * @callback onNewWish - Callback que se ejecutara cuando se cree un deseo nuevo.
+ */
 
-
-
-// El parametro entre llaves porque es un evento/funcion/objeto
+/**
+ * Crea nuevos deseos
+ * @param {onNewWish} callback - Callback para ejecutarse cuando se cree un deseo nuevo.
+ * @returns  Un nuevo deseo a la lista
+ */
 function WishInput({ onNewWish }) {
+  const inputText = useRef();
+  /**
+   * Añade un deseo a la lista
+   * @returns Un deseo nuevo al pulsar intro
+   */
   const add = (event) => {
-    if (event.key === 'Enter' && inputText.current.value.length > 0) {
+    if (event.key === "Enter" && inputText.current.value.length > 0) {
       // creamos un evento nuevo que recibira 3 parametros
       onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
       // Pongo el campo vacio despues haber introducido el nuevo deseo
-      inputText.current.value = '';
+      inputText.current.value = "";
     }
-  }
+  };
 
-  // Creamos una variable de tipo referencia para recuperar un elemento
-  const inputText = useRef();
   return (
     <fieldset className="input-group">
-      <legend>New Dish: </legend>
+      <legend>New Wish: </legend>
       <input
         className="form-control"
         type="text"
@@ -31,14 +39,20 @@ function WishInput({ onNewWish }) {
         ref={inputText}
         onKeyUp={add}
       />
-      <WishAdd addClick ={ (event) => {
-      if (inputText.current.value.length > 0) {
-      // creamos un evento nuevo que recibira 3 parametros
-      onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
-      // Pongo el campo vacio despues haber introducido el nuevo deseo
-      inputText.current.value = '';
-      }
-     }}/>
+      <WishAdd
+        addClick={() => {
+          if (inputText.current.value.length > 0) {
+            // creamos un evento nuevo que recibira 3 parametros
+            onNewWish({
+              id: Uuidv4(),
+              text: inputText.current.value,
+              done: false,
+            });
+            // Pongo el campo vacio despues haber introducido el nuevo deseo
+            inputText.current.value = "";
+          }
+        }}
+      />
     </fieldset>
   );
 }
