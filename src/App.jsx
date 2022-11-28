@@ -7,6 +7,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min";
 import logo from "./assets/react.svg";
+import WishSearchBar from "./components/WishSearchBar";
 
 /**
  * Administra una lista de deseos
@@ -55,7 +56,7 @@ function App() {
       <div className="header-img m-4">
         <img src={logo} alt="50px" width="50px" />
       </div>
-     
+      <WishSearchBar onChange={search} />
       <WishInput
         onNewWish={(newWish) => {
           setWishes([...wishes, newWish]);
