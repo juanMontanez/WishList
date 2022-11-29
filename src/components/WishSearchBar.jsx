@@ -51,7 +51,7 @@ function WishSearchBar({ onChange, wishes, props }) {
         type="button"
         onClick={inputHandler}
       >
-        Buscar
+        Search
       </button>
     </form>
   );

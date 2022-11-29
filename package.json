@@ -7,7 +7,7 @@
     "start": "vite",
     "lint": "eslint --fix src/**/*.{js,jsx}",
     "format": "prettier --write src/**/*.{html,css,js,jsx,json}",
-    "doc": "jsdoc -r -d ./doc -R Readme.md ./src",
+    "doc": "jsdoc -R ./README.md -d ./doc ./src",
     "build": "vite build",
     "preview": "vite preview"
   },
