@@ -37,7 +37,7 @@ El uso de la aplicación es el siguiente:
 La interfaz es la siguiente:
 
 <p align="center">
-  <img src="https://drive.google.com/file/d/1n-1dGLJI6nC2VF8GW0HNg0xTMv8A-x-V/view?usp=share_link" title="Interfaz My WishList">
+  <img src="https://i.ibb.co/BCZ1RGs/My-Wish-List.jpg" title="Interfaz My WishList">
 </p>
 
 ## Contacto
