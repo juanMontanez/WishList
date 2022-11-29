@@ -31,7 +31,7 @@ El uso de la aplicación es el siguiente:
 * En la lista de deseos podemos marcar el deseo como completado haciendo click en el `checkbox` de su lado izquierdo y en su lado derecho tenemos 2 botones:
     * El `botón Edit` que al pulsarlo nos mostrará un modal para editar el deseo.
     * El `botón Delete` el cual elimirá el deseo al pulsarlo sin pedir confirmación.
-* Cada deseo se puede arrastar haciendo manteniendo click sobre él y moverlo a la posición deseada. 
+* Cada deseo puede modificar su posición en la lista, manteniendo click sobre él y moviéndolo a la posición deseada. 
 * Al final de la lista de deseos tenemos el `botón Save` que guardara la lista de deseos el Local Storage de nuestro navegador.
 
 La interfaz es la siguiente:
