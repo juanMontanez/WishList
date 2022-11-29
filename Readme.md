@@ -1,6 +1,6 @@
 # WishList
 <p align="center">
-    Proyecto de REACT en que se realiza un CRUD sobre deseos.
+    Proyecto creado en REACT en el que se realiza un CRUD sobre deseos.
     <br />
 </p>
 
