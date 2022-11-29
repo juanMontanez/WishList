@@ -17,7 +17,11 @@ Tener instalado node.js en el equipo, el cual integra el `gestor de paquetes npm
    ```sh
    git clone https://github.com/juanMontanez/WishList.git
    ```
-2. Ejecutar el paquete:
+2. Instalar dependecias:
+   ```sh
+   npm install
+   ```
+3. Ejecutar la aplicación:
    ```sh
    npm start
    ```
