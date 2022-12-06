@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import WishModal from "./WishModal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import WishModal from './WishModal';
 
 /**
  * Callback para ejecutar cuando se pulse el botón edit
@@ -42,7 +42,7 @@ WishEdit.propTypes = {
 };
 
 WishEdit.defaultProps = {
-  item: { id: "0", text: "Texto por defecto", done: false },
+  item: { id: '0', text: 'Texto por defecto', done: false },
   editClick: () => {},
 };
 

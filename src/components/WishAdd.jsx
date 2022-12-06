@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Callback para ejecutar cuando se pulse el botón add
@@ -33,7 +33,7 @@ WishAdd.propTypes = {
 };
 
 WishAdd.defaultProps = {
-  item: { id: "0", text: "Texto por defecto", done: false },
+  item: { id: '0', text: 'Texto por defecto', done: false },
   addClick: () => {},
 };
 

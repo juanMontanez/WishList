@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Callback que se ejecuta cuando el usuario escribe en el input.
@@ -26,7 +26,7 @@ function WishSearchBar({ onChange, wishes, props }) {
    */
   const inputHandler = () => {
     const filterWishes = wishes.filter((element) => {
-      if (props.input === "") {
+      if (props.input === '') {
         return wishes;
       }
       return element.text.includes(inputRef.current.value);
@@ -65,13 +65,13 @@ WishSearchBar.propTypes = {
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       done: PropTypes.bool.isRequired,
-    })
+    }),
   ),
   onChange: PropTypes.func,
 };
 
 WishSearchBar.defaultProps = {
-  props: " ",
+  props: ' ',
   input: null,
   wishes: [],
   onChange: () => {},

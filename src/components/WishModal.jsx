@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Renderiza el modal de editar.
@@ -78,7 +78,7 @@ WishModal.propTypes = {
 };
 
 WishModal.defaultProps = {
-  item: { id: "0", text: "Texto por defecto", done: false },
+  item: { id: '0', text: 'Texto por defecto', done: false },
   editClick: () => {},
 };
 

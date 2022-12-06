@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
-import Wishitem from "./WishItem";
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import Wishitem from './WishItem';
 
 /**
  * Callback para setear un lista de deseos
@@ -28,13 +28,15 @@ import Wishitem from "./WishItem";
  * @param {onUpdateWish} callback - Callback para ejecutarse cuando un deseo cambie.
  * @returns  HTML con una lista de deseos
  */
-function WishList({ props, setWishes, wishes, onUpdateWish }) {
+function WishList({
+  props, setWishes, wishes, onUpdateWish,
+}) {
   /**
    * Obtiene una lista de deseos filtrados por el valor del input de la barra de búsqueda
    * @returns Lista de deseos filtrados de la barra de búsqueda
    */
   const filter = wishes.filter((e) => {
-    if (props.input === "") {
+    if (props.input === '') {
       return e;
     }
     return e.text.toLowerCase().includes(props);
@@ -67,8 +69,8 @@ function WishList({ props, setWishes, wishes, onUpdateWish }) {
         <div
           key={id}
           draggable
-          onDragStart={() => (dragItem.current = index)}
-          onDragEnter={() => (dragOverItem.current = index)}
+          onDragStart={() => { (dragItem.current = index); }}
+          onDragEnter={() => { (dragOverItem.current = index); }}
           onDragEnd={handleSort}
           onDragOver={(e) => e.preventDefault()}
         >
@@ -96,17 +98,17 @@ WishList.propTypes = {
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       done: PropTypes.bool.isRequired,
-    })
+    }),
   ),
   onUpdateWish: PropTypes.func,
 };
 
 WishList.defaultProps = {
-  props: " ",
+  props: ' ',
   input: null,
   wishes: [],
   setWishes: () => {},
-  onUpdateWish: () => ({ id: "", text: "", done: false }),
+  onUpdateWish: () => ({ id: '', text: '', done: false }),
 };
 
 export default WishList;

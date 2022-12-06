@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { v4 as Uuidv4 } from "uuid";
-import PropTypes from "prop-types";
-import WishAdd from "./WishAdd";
+import React, { useRef } from 'react';
+import { v4 as Uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
+import WishAdd from './WishAdd';
 
 /**
  * Callback para ejecutar cuando se cree un deseo nuevo
@@ -20,11 +20,11 @@ function WishInput({ onNewWish }) {
    * @returns Un deseo nuevo al pulsar intro
    */
   const add = (event) => {
-    if (event.key === "Enter" && inputText.current.value.length > 0) {
+    if (event.key === 'Enter' && inputText.current.value.length > 0) {
       // creamos un evento nuevo que recibira 3 parametros
       onNewWish({ id: Uuidv4(), text: inputText.current.value, done: false });
       // Pongo el campo vacio despues haber introducido el nuevo deseo
-      inputText.current.value = "";
+      inputText.current.value = '';
     }
   };
 
@@ -49,7 +49,7 @@ function WishInput({ onNewWish }) {
               done: false,
             });
             // Pongo el campo vacio despues haber introducido el nuevo deseo
-            inputText.current.value = "";
+            inputText.current.value = '';
           }
         }}
       />

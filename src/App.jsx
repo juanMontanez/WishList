@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { v4 as Uuidv4 } from "uuid";
-import WishList from "./components/WishList";
-import WishInput from "./components/WishInput";
-import WishSave from "./components/WishSave";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min";
-import logo from "./assets/react.svg";
-import WishSearchBar from "./components/WishSearchBar";
+import React, { useState } from 'react';
+import { v4 as Uuidv4 } from 'uuid';
+import WishList from './components/WishList';
+import WishInput from './components/WishInput';
+import WishSave from './components/WishSave';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min';
+import logo from './assets/react.svg';
+import WishSearchBar from './components/WishSearchBar';
 
 /**
  * Administra una lista de deseos
@@ -18,13 +18,13 @@ function App() {
    * Obtiene una lista de deseos
    * @returns JSON con la lista de deseos almacenadas en el LocalStorage
    */
-  let initialWishes = JSON.parse(localStorage.getItem("WISHES"));
+  let initialWishes = JSON.parse(localStorage.getItem('WISHES'));
 
   /**
    * Gestiona el input del campo de busqueda
    * @returns el input del campo de busqueda, que es seteado con setInput
    */
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   /**
    * Obtiene el input del campo de busqueda
@@ -37,10 +37,10 @@ function App() {
 
   if (!initialWishes) {
     initialWishes = [
-      { id: Uuidv4(), text: "Aprender React", done: false },
-      { id: Uuidv4(), text: "Aprender Bootstrap", done: false },
-      { id: Uuidv4(), text: "Aprender Javascript", done: false },
-      { id: Uuidv4(), text: "Aprender frontend", done: true },
+      { id: Uuidv4(), text: 'Aprender React', done: false },
+      { id: Uuidv4(), text: 'Aprender Bootstrap', done: false },
+      { id: Uuidv4(), text: 'Aprender Javascript', done: false },
+      { id: Uuidv4(), text: 'Aprender frontend', done: true },
     ];
   }
 
@@ -69,7 +69,7 @@ function App() {
         onUpdateWish={(updateWish) => {
           const updatedWishes = [...wishes];
           const modifyWish = updatedWishes.find(
-            (wish) => wish.id === updateWish.id
+            (wish) => wish.id === updateWish.id,
           );
           modifyWish.text = updateWish.text;
           modifyWish.done = updateWish.done;
@@ -78,8 +78,8 @@ function App() {
       />
       <WishSave
         onWishesSave={() => {
-          console.log("Saving wishes...");
-          localStorage.setItem("WISHES", JSON.stringify(wishes));
+          console.log('Saving wishes...');
+          localStorage.setItem('WISHES', JSON.stringify(wishes));
         }}
       />
     </div>

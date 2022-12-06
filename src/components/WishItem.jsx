@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ClassNames from "classnames";
-import "./WishItem.css";
-import WishDelete from "./WishDelete";
-import WishEdit from "./WishEdit";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import './WishItem.css';
+import WishDelete from './WishDelete';
+import WishEdit from './WishEdit';
 
 /**
  * Callback para setear un lista de deseos
@@ -34,7 +34,9 @@ import WishEdit from "./WishEdit";
  * @param {onChangeWish} callback - Callback para ejecutarse cuando un deseo cambie.
  * @returns  HTML con un deseo
  */
-function WishItem({ setWishes, wishes, item, onChangeWish }) {
+function WishItem({
+  setWishes, wishes, item, onChangeWish,
+}) {
   return (
     <li className="list-group-item WishItem">
       <input
@@ -51,8 +53,8 @@ function WishItem({ setWishes, wishes, item, onChangeWish }) {
       />
       <label
         className={ClassNames({
-          "text-decoration-line-through": item.done,
-          "wish-item-done": item.done,
+          'text-decoration-line-through': item.done,
+          'wish-item-done': item.done,
         })}
         htmlFor={item.id}
       >
@@ -92,14 +94,14 @@ WishItem.propTypes = {
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       done: PropTypes.bool.isRequired,
-    })
+    }),
   ),
   onChangeWish: PropTypes.func,
 };
 
 WishItem.defaultProps = {
   wishes: [],
-  item: { id: "0", text: "Texto por defecto", done: false },
+  item: { id: '0', text: 'Texto por defecto', done: false },
   setWishes: () => {},
   onChangeWish: () => {},
 };
